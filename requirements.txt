@@ -1,0 +1,2 @@
+mcdapi
+requests[socks]
