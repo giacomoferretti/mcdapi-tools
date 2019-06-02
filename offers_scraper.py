@@ -53,7 +53,8 @@ def main():
     headers = coupon.strip_unnecessary_headers(coupon.get_random_headers(vmob, plexure))
 
     r = session.request(endpoints.DEVICE_REGISTRATION['method'], endpoints.DEVICE_REGISTRATION['url'],
-                        data=endpoints.DEVICE_REGISTRATION['body'].format(username, password), headers=headers)
+                        data=endpoints.DEVICE_REGISTRATION['body'].format(username=username, password=password),
+                        headers=headers)
 
     if r.status_code == 200:
         print('Successfully got a token.')
@@ -72,7 +73,7 @@ def main():
         session.headers.update(headers)
 
         r = session.request(endpoints.REDEEM_OFFER['method'], endpoints.REDEEM_OFFER['url'],
-                            data=endpoints.REDEEM_OFFER['body'].format(x, x))
+                            data=endpoints.REDEEM_OFFER['body'].format(id=x))
 
         with open(__output_file__, 'w') as f:
             print('Got a response with code {}'.format(r.status_code))
