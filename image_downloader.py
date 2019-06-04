@@ -53,23 +53,6 @@ def main():
             with open(os.path.join(__image_folder__, x['promoImagePath']), 'wb') as f:
                 f.write(r.content)
 
-        """
-        if r.status_code == 200:
-            # Create inline keyboard
-            keyboard = [
-                [
-                    InlineKeyboardButton('\u2705 Va bene', callback_data='{}_id_{}'.format(self.name, id_)),
-                    InlineKeyboardButton('\u2b05 Torna indietro', callback_data='{}_list'.format(self.name))
-                ]
-            ]
-            reply_markup = InlineKeyboardMarkup(keyboard)
-    
-            body = self.__config__.get_template('coupon_preview.html') \
-                .format(title=offers[offer_index]['title'], description=offers[offer_index]['description'])
-    
-            context.bot.send_photo(chat_id=query.message.chat.id, photo=BytesIO(r.content), caption=body,
-                                   parse_mode=ParseMode.HTML, reply_markup=reply_markup)
-        """
 
 if __name__ == '__main__':
     main()
