@@ -25,7 +25,7 @@ __merchant_id__ = 587
 
 
 def main():
-    offers = []
+    offers = {}
 
     with open(__input_file__) as f:
         js = json.loads(f.read())
@@ -34,7 +34,6 @@ def main():
             if x['code'] == 200:
                 if x['response']['merchantId'] == __merchant_id__:
                     obj = {
-                        'id': x['id'],
                         'customTitle': '',
                         'title': x['response']['title'],
                         'description': x['response']['description'],
@@ -44,7 +43,7 @@ def main():
                         'redemptionId': x['response']['redemptionId']
                     }
 
-                    offers.append(obj)
+                    offers[x['id']] = obj
 
     with open(__output_file__, 'w') as f:
         print('Found {num} offers matching {merchant}.'.format(num=len(offers), merchant=__merchant_id__))
