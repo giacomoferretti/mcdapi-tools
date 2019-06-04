@@ -26,8 +26,8 @@ from mcdapi import coupon, endpoints
 __proxy_enabled__ = True
 __proxy_url__ = 'socks5://127.0.0.1:9050'
 __output_file__ = 'offers_scraped.json'
-__start_id__ = 14760
-__end_id__ = 16010
+__start_id__ = 10000
+__end_id__ = 20000
 
 
 def main():
@@ -75,15 +75,21 @@ def main():
         r = session.request(endpoints.REDEEM_OFFER['method'], endpoints.REDEEM_OFFER['url'],
                             data=endpoints.REDEEM_OFFER['body'].format(id=x))
 
-        with open(__output_file__, 'w') as f:
-            print('Got a response with code {}'.format(r.status_code))
-            offer = {
-                'id': x,
-                'code': r.status_code,
-                'response': json.loads(r.content)
-            }
-            offers.append(offer)
-            f.write(json.dumps(offers))
+        print('Got a response with code {}'.format(r.status_code), end='')
+
+        if r.status_code == 200:
+            response = json.loads(r.content)
+            print(': {} [{} - {}]'.format(response['title'], response['startDate'], response['endDate']))
+            with open(__output_file__, 'w') as f:
+                offer = {
+                    'id': x,
+                    'code': r.status_code,
+                    'response': json.loads(r.content)
+                }
+                offers.append(offer)
+                f.write(json.dumps(offers))
+        else:
+            print(': {}'.format(json.loads(r.content)['error']))
 
     end_time = datetime.now()
     print('Elapsed time: ' + str(end_time - start_time))
