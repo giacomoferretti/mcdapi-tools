@@ -20,4 +20,6 @@ Edit the file to your needs.
 NOTE: Use it after creating an `offers_scraped.json` with the `offers_scraper.py` tool.
 
 ## Disclaimer
-This repository is not affiliated with Mcdonald's Corp in any way. "McDonald's" and "McDonald's Logo" are registered trademarks of Mcdonald's Corp.
+This repository is against McDonald's ToS.
+
+This repository is not affiliated with McDonald's Corp in any way. "McDonald's" and "McDonald's Logo" are registered trademarks of McDonald's Corp.
