@@ -58,7 +58,7 @@ def main():
 
     if r.status_code == 200:
         print('Successfully got a token.')
-        token = json.loads(r.content)['access_token']
+        token = json.loads(r.content.decode('utf-8'))['access_token']
         headers['Authorization'] = 'bearer ' + token
     else:
         print('ERROR 100')
@@ -80,7 +80,7 @@ def main():
             offer = {
                 'id': x,
                 'code': r.status_code,
-                'response': json.loads(r.content)
+                'response': json.loads(r.content.decode('utf-8'))
             }
             offers.append(offer)
             f.write(json.dumps(offers))
