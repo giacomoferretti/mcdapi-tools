@@ -41,7 +41,8 @@ def main():
                         'startDate': x['response']['startDate'],
                         'endDate': x['response']['endDate'],
                         'promoImagePath': x['response']['promoImagePath'],
-                        'redemptionId': x['response']['redemptionId']
+                        'redemptionId': x['response']['redemptionId'],
+                        'special': False
                     }
 
                     offers[x['id']] = obj
