@@ -43,14 +43,15 @@ def main():
         offers = json.loads(f.read())
 
     for x in offers:
+        print('Getting offer {}...'.format(x))
         params = endpoints.PROMO_IMAGE['params']
-        params['path'] = x['promoImagePath']
+        params['path'] = offers[x]['promoImagePath']
         params['imageFormat'] = 'png'
-        r = session.request(endpoints.PROMO_IMAGE['method'], endpoints.PROMO_IMAGE['url'].format(size=512),
+        r = session.request(endpoints.PROMO_IMAGE['method'], endpoints.PROMO_IMAGE['url'].format(size=1080),
                             params=params)
 
         if r.status_code == 200:
-            with open(os.path.join(__image_folder__, x['promoImagePath']), 'wb') as f:
+            with open(os.path.join(__image_folder__, offers[x]['promoImagePath']), 'wb') as f:
                 f.write(r.content)
 
 
