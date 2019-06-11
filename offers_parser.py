@@ -35,8 +35,9 @@ def main():
                 if x['response']['merchantId'] == __merchant_id__:
                     obj = {
                         'customTitle': '',
-                        'title': x['response']['title'],
-                        'description': x['response']['description'],
+                        'title': x['response']['title'].strip(),
+                        'description': x['response']['description'].strip(),
+                        'special': False,
                         'startDate': x['response']['startDate'],
                         'endDate': x['response']['endDate'],
                         'promoImagePath': x['response']['promoImagePath'],
