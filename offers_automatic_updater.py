@@ -15,14 +15,12 @@
 #  limitations under the License.
 
 import json
-from datetime import datetime
 
 import mcdapi
 import requests
 
 from mcdapi import coupon, endpoints
 
-import os.path
 from os import path
 
 # Edit these variables
@@ -30,8 +28,8 @@ __proxy_enabled__ = False
 __proxy_url__ = 'socks5://127.0.0.1:9050'
 __json__ = 'offers.json'
 __merchant_id__ = 587
-    # These IDs will be used in case no offers
-    # file was found
+# These IDs will be used in case the offers
+# file was not found
 __start_id__ = 14760
 __end_id__ = 16010
 
@@ -54,10 +52,12 @@ def scraper(start, end):
     vmob = coupon.generate_vmob_uid(device_id)
     plexure = coupon.generate_plexure_api_key(vmob)
 
-    headers = coupon.strip_unnecessary_headers(coupon.get_random_headers(vmob, plexure))
+    headers = coupon.strip_unnecessary_headers(
+        coupon.get_random_headers(vmob, plexure))
 
     r = session.request(endpoints.DEVICE_REGISTRATION['method'], endpoints.DEVICE_REGISTRATION['url'],
-                        data=endpoints.DEVICE_REGISTRATION['body'].format(username=username, password=password),
+                        data=endpoints.DEVICE_REGISTRATION['body'].format(
+                            username=username, password=password),
                         headers=headers)
 
     if r.status_code == 200:
@@ -86,7 +86,7 @@ def scraper(start, end):
             'response': json.loads(r.content.decode('utf-8'))
         }
         offers.append(offer)
-    
+
     return offers
 
 
@@ -111,6 +111,7 @@ def parser(input_json, merchant_id):
 
     return json.dumps(offers, indent=2)
 
+
 def main():
     if path.exists(__json__):
         print('Using the json file!')
@@ -130,6 +131,7 @@ def main():
 
     with open(__json__) as f:
         f.write(parsed)
+
 
 if __name__ == '__main__':
     main()
