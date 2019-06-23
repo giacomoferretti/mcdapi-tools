@@ -14,12 +14,8 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-import json
+import json, mcdapi, requests, sys
 from datetime import datetime
-
-import mcdapi
-import requests
-
 from mcdapi import coupon, endpoints
 
 # Edit these variables
@@ -31,7 +27,9 @@ __end_id__ = 20000
 
 
 def main():
-    print('Starting scraping {num} offers using mcdapi ({version})...'.format(num=(__end_id__ - __start_id__),
+    non_bmp_map = dict.fromkeys(range(0x10000, sys.maxunicode + 1), 0xfffd)
+    
+    print('Starting scraping {num} offers using mcdapi ({version})...'.format(num=(__end_id__ - __start_id__ + 1),
                                                                               version=mcdapi.__version__))
 
     start_time = datetime.now()
@@ -79,17 +77,18 @@ def main():
 
         if r.status_code == 200:
             response = json.loads(r.content)
-            print(': {} [{} - {}]'.format(response['title'], response['startDate'], response['endDate']))
-            with open(__output_file__, 'w') as f:
-                offer = {
-                    'id': x,
-                    'code': r.status_code,
-                    'response': json.loads(r.content.decode('utf-8'))
-                }
-                offers.append(offer)
-                f.write(json.dumps(offers))
+            print(': {} [{} - {}]'.format(response['title'].translate(non_bmp_map), response['startDate'], response['endDate']))
+            offer = {
+               'id': x,
+               'code': r.status_code,
+               'response': json.loads(r.content.decode('utf-8'))
+            }
+            offers.append(offer)
         else:
             print(': {}'.format(json.loads(r.content)['error']))
+            
+    with open(__output_file__, 'w') as f:
+         f.write(json.dumps(offers))
 
     end_time = datetime.now()
     print('Elapsed time: ' + str(end_time - start_time))
