@@ -129,7 +129,7 @@ def main():
 
     parsed = parser(scraped, __merchant_id__)
 
-    with open(__json__) as f:
+    with open(__json__, 'w') as f:
         f.write(parsed)
 
 
