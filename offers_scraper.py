@@ -31,7 +31,7 @@ __end_id__ = 20000
 
 
 def main():
-    print('Starting scraping {num} offers using mcdapi ({version})...'.format(num=(__end_id__ - __start_id__),
+    print('Starting scraping {num} offers using mcdapi ({version})...'.format(num=(__end_id__ - __start_id__ + 1),
                                                                               version=mcdapi.__version__))
 
     start_time = datetime.now()
