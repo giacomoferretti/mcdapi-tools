@@ -63,12 +63,18 @@ def main():
     for x in range(__start_id__, __end_id__ + 1):
         print('Requesting offer {}... '.format(x), end='')
 
-        plexure = coupon.generate_plexure_api_key(vmob)
-        headers['x-plexure-api-key'] = plexure
-        session.headers.update(headers)
+        try:
+            plexure = coupon.generate_plexure_api_key(vmob)
+            headers['x-plexure-api-key'] = plexure
+            session.headers.update(headers)
 
-        r = session.request(endpoints.REDEEM_OFFER['method'], endpoints.REDEEM_OFFER['url'],
-                            data=endpoints.REDEEM_OFFER['body'].format(id=x))
+            r = session.request(endpoints.REDEEM_OFFER['method'], endpoints.REDEEM_OFFER['url'],
+                                data=endpoints.REDEEM_OFFER['body'].format(id=x))
+        except Exception:
+            print("Exception caught while scraping the offer {}".format(x))
+            with open(__output_file__, 'w') as f:
+                f.write(json.dumps(offers))
+            continue
 
         print('Got a response with code {}'.format(r.status_code), end='')
 
