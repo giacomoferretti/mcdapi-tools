@@ -24,7 +24,7 @@ from mcdapi import coupon, endpoints
 from os import path
 
 # Edit these variables
-__proxy_enabled__ = False
+__proxy_enabled__ = True
 __proxy_url__ = 'socks5://127.0.0.1:9050'
 __json__ = 'offers.json'
 __merchant_id__ = 587
