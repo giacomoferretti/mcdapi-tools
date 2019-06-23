@@ -27,7 +27,7 @@ __end_id__ = 20000
 
 
 def main():
-    non_bmp_map = dict.fromkeys(range(0x10000, sys.maxunicode + 1), 0xfffd)
+    non_bmp_map = dict.fromkeys(range(0x10000, sys.maxunicode + 1), 0xfffd) #used to print the offer title without a unicode error
     print('Starting scraping {num} offers using mcdapi ({version})...'.format(num=(__end_id__ - __start_id__ + 1),
                                                                               version=mcdapi.__version__))
     start_time = datetime.now()
