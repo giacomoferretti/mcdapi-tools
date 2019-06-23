@@ -86,7 +86,6 @@ def main():
             offers.append(offer)
         else:
             print(': {}'.format(json.loads(r.content)['error']))
-            
     with open(__output_file__, 'w') as f:
          f.write(json.dumps(offers))
 
