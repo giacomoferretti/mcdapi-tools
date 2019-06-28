@@ -12,9 +12,6 @@ dist/
 # IntelliJ
 .idea/
 
-# GitHub
-.github/
-
 # Custom
 offers_parsed.json
 offers_scraped.json
