@@ -1,3 +1,4 @@
+![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/giacomoferretti/mcdapi-tools.svg?color=blue&label=Stable)
 [![GitHub license](https://img.shields.io/github/license/giacomoferretti/mcdapi-tools.svg?color=informational)](https://github.com/giacomoferretti/mcdapi-tools/blob/master/LICENSE)
 
 ![Header](.github/header.png)
