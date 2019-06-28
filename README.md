@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b0bbc37b52804a70aa5c57326abf2c96)](https://www.codacy.com/app/giacomoferretti/mcdapi-tools?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=giacomoferretti/mcdapi-tools&amp;utm_campaign=Badge_Grade)
 ![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/giacomoferretti/mcdapi-tools.svg?color=blue&label=Stable)
 [![GitHub license](https://img.shields.io/github/license/giacomoferretti/mcdapi-tools.svg?color=informational)](https://github.com/giacomoferretti/mcdapi-tools/blob/master/LICENSE)
 
