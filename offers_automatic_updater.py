@@ -15,13 +15,13 @@
 #  limitations under the License.
 
 import json
+from os import path
 
 import mcdapi
 import requests
 
 from mcdapi import coupon, endpoints
 
-from os import path
 
 # Edit these variables
 __proxy_enabled__ = True
@@ -115,21 +115,29 @@ def parser(input_json, merchant_id):
 def main():
     if path.exists(__json__):
         print('Using the json file!')
-        with open(__json__) as f:
-            js = json.loads(f.read())
+        with open(__json__, 'r') as f:
+            js = f.read()
             f.close()
-        start_id = js[0]['id']
-        end_id = js[-1]['id'] + 200
-        print(start_id)
-        print(end_id)
-        scraped = scraper(start_id, end_id)
+        if len(js) <= 2:
+            print(
+                'The JSON file doesn\'t have enough elements, switching to default values')
+            scraped = scraper(__start_id__, __end_id__)
+        else:
+            js = json.loads(js)
+            keys = list(js.keys())
+            start_id = int(keys[0])
+            end_id = int(keys[-1]) + 200
+            print('Start ID: ' + start_id)
+            print('End ID:' + end_id)
+            scraped = scraper(start_id, end_id)
+
     else:
         print('Json file not found! Using the configured values.')
         scraped = scraper(__start_id__, __end_id__)
 
     parsed = parser(scraped, __merchant_id__)
 
-    with open(__json__, 'w') as f:
+    with open(__json__, 'w+') as f:
         f.write(parsed)
 
 
