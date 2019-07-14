@@ -35,7 +35,7 @@ __end_id__ = 16010
 
 
 def scraper(start, end):
-    print('Starting scraping {num} offers using mcdapi ({version})...'.format(num=(__end_id__ - __start_id__),
+    print('Starting scraping {num} offers using mcdapi ({version})...'.format(num=(end - start + 1),
                                                                               version=mcdapi.__version__))
 
     session = requests.session()
