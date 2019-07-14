@@ -127,8 +127,8 @@ def main():
             keys = list(js.keys())
             start_id = int(keys[0])
             end_id = int(keys[-1]) + 200
-            print('Start ID: ' + start_id)
-            print('End ID:' + end_id)
+            print('Start ID: ' + str(start_id))
+            print('End ID:' + str(end_id))
             scraped = scraper(start_id, end_id)
 
     else:
